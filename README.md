@@ -16,22 +16,6 @@ This project visualizes the connections between Malawi's 28 districts as a graph
 - **Nodes**: Each district is represented as a node with an initial (x, y) position (values between 0 and 1).
 - **Edges**: Connections between districts are defined as pairs of district names in an adjacency list.
 
-Example (`src/assets/data.json`):
-```json
-{
-  "nodes": [
-    { "id": "Blantyre", "x": 0.91, "y": 0.25 },
-    { "id": "Chikwawa", "x": 0.14, "y": 0.39 },
-    ...
-    { "id": "Likoma", "x": 0.34, "y": 0.62 }
-  ],
-  "edges": [
-    ["Blantyre", "Chikwawa"],
-    ["Blantyre", "Chiradzulu"],
-    ...
-  ]
-}
-```
 
 ## Layout & UI
 - **Header**: Project title at the top.

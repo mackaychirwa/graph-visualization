@@ -9,9 +9,9 @@ const GraphVisualization = ({ graphData, onOptimizedPositionsChange, onConnectio
 
   // Store the callback in a ref to avoid dependency issues
   callbackRef.current = onOptimizedPositionsChange;
-
+  // The useEffect will only run once when the component runs
   useEffect(() => {
-    // Only run this effect once when component mounts
+  
     const initializeGraph = () => {
       const width = window.innerWidth * 0.8;
       const height = 700;
@@ -101,7 +101,7 @@ const GraphVisualization = ({ graphData, onOptimizedPositionsChange, onConnectio
         label.attr("x", d => d.x).attr("y", d => d.y);
       });
 
-    // Final tick: capture optimized positions
+    // capture optimized positions
     simulation.on('end', () => {
       const normalized = normalizePositions(nodes, width, height);
       if (callbackRef.current) {
@@ -159,6 +159,7 @@ const GraphVisualization = ({ graphData, onOptimizedPositionsChange, onConnectio
 
     // Stop simulation after stabilization
     simulation.stop();
+    // The time out is to run within 3 secs
     setTimeout(() => {
         setIsRunning(true);
         simulation.alpha(1).restart();
@@ -173,21 +174,21 @@ const GraphVisualization = ({ graphData, onOptimizedPositionsChange, onConnectio
     }, 100);
 
       // Show collision circles during debugging
-      g.selectAll(".debug")
-      .data(nodes)
-      .enter()
-      .append("circle")
-      .attr("class", "debug")
-      .attr("r", 30)
-      .attr("fill", "none")
-      .attr("stroke", "#f00")
-      .attr("stroke-opacity", 0.3);
+      // g.selectAll(".debug")
+      // .data(nodes)
+      // .enter()
+      // .append("circle")
+      // .attr("class", "debug")
+      // .attr("r", 30)
+      // .attr("fill", "none")
+      // .attr("stroke", "#f00")
+      // .attr("stroke-opacity", 0.3);
     };
 
     // Initialize the graph
     initializeGraph();
 
-    // Cleanup function
+    // Cleanup function to avoid memory leaks
     return () => {
       if (simulationRef.current) {
         simulationRef.current.stop();
